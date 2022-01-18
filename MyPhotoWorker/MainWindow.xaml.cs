@@ -34,7 +34,7 @@ namespace MyPhotoWorker
         //MediaFiles AllFiles = new MediaFiles();
         MediaFiles AllFiles = new MediaFiles();
         // löschen ! List<string> AddInfoList = new List<string> { "beruf" };
-        String Version = "MyPhotoWorker 0.8.4.2";
+        String Version = "MyPhotoWorker " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         //public Cameras AllCameras { get { return _AllCameras; } set { _AllCameras = value; } }
 
@@ -297,6 +297,18 @@ namespace MyPhotoWorker
                 
             }
             ReadWorkDir();
+        }
+
+        private void ManFileRename_Click(object sender, RoutedEventArgs e)
+        {
+            ManFileRename();
+        }
+        private void ManFileRename()
+        {
+            foreach (MediaFile mf in AllFiles)
+            {
+                mf.FileNameNew = cbx_jahr.SelectedValue.ToString();
+            }
         }
     }
 }

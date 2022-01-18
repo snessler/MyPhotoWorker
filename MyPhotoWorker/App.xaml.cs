@@ -21,6 +21,7 @@ namespace MyPhotoWorker
         {
             //Console.WriteLine("111111111111111111111111111111111111111111111111111");
             if (System.IO.Directory.Exists(@"c:\portableapps\myphotoworker\")) AppExePath = @"c:\portableapps\myphotoworker\";
+            if (System.IO.Directory.Exists(@"d:\programme\myphotoworker_apple\")) AppExePath = @"d:\programme\myphotoworker_apple\";
         }
 
     }
