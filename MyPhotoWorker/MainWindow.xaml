@@ -109,105 +109,105 @@
     </Window.TaskbarItemInfo>
     <!--<TabControl>
         <TabItem Header="Von Kameras">-->
-            <DockPanel>
-                <Menu DockPanel.Dock="Top">
-                    <MenuItem Header="_Help">
-                        <MenuItem Header="_Ansicht" >
-                            <RadioButton IsChecked="True">Klein</RadioButton>
-                            <RadioButton>Groß</RadioButton>
-                        </MenuItem>
-                        <MenuItem Header="_Info" />
-                    </MenuItem>
-                    <MenuItem Header="_Archiv">
-                        <MenuItem Header="Archivverzeichnis auswählen" Click="MenuItem_Click_1" />
-                        <MenuItem Header="Archivverzeichnis öffnen" Click="MenuItem_Click_2" />
-                    </MenuItem>
-                    <MenuItem Header="_Einstellungen" Click="MenuItem_Click" />
-                </Menu>
-                <TextBox DockPanel.Dock="Bottom" x:Name="ui_txt_message" Height="20" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Background="{x:Null}" />
-                <StackPanel DockPanel.Dock="Left" >
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Ansicht" >
+                    <RadioButton IsChecked="True">Klein</RadioButton>
+                    <RadioButton>Groß</RadioButton>
+                </MenuItem>
+                <MenuItem Header="_Info" />
+            </MenuItem>
+            <MenuItem Header="_Archiv">
+                <MenuItem Header="Archivverzeichnis auswählen" Click="MenuItem_Click_1" />
+                <MenuItem Header="Archivverzeichnis öffnen" Click="MenuItem_Click_2" />
+            </MenuItem>
+            <MenuItem Header="_Einstellungen" Click="MenuItem_Click" />
+        </Menu>
+        <TextBox DockPanel.Dock="Bottom" x:Name="ui_txt_message" Height="20" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Background="{x:Null}" />
+        <StackPanel DockPanel.Dock="Left" >
 
-                    <!--<TextBox x:Name="ui_txt_filefound" Text="-" FontFamily="Arial" BorderThickness="0" Background="{x:Null}" />-->
-                    <!--<MediaElement x:Name="ui_media_last" Height="200"/>-->
-                </StackPanel>
-                <StackPanel DockPanel.Dock="Right" Margin="0,0,0,0">
-                </StackPanel>
-                <DockPanel >
-                    <StackPanel DockPanel.Dock="Top">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
+            <!--<TextBox x:Name="ui_txt_filefound" Text="-" FontFamily="Arial" BorderThickness="0" Background="{x:Null}" />-->
+            <!--<MediaElement x:Name="ui_media_last" Height="200"/>-->
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right" Margin="0,0,0,0">
+        </StackPanel>
+        <DockPanel >
+            <StackPanel DockPanel.Dock="Top">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
 
-                            <StackPanel Orientation="Horizontal">
-                                <Label x:Name="label3" Width="250" Content="Verzeichnis mit Bildern aus der Kamera:" Foreground="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" FontWeight="Bold" Padding="5"/>
-                                <TextBox x:Name="ui_txt_workdir" Width="500" Text="unbekannt" FontSize="16" FontWeight="Bold" />
-                                <Button x:Name="ui_btn_workdir" Content="..." Width="30" Click="ui_btn_workdir_Click"/>
-                                <Button x:Name="ui_btn_openworkdir" Width="30" Click="ui_btn_openworkdir_Click">
-                                    <Image Height="20" Source="img\explorer24.png"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Expander Header="Manuelle Umbenennung" BorderThickness="1,1,1,5" Background="#FF5192BA" BorderBrush="#FF061168" >
-                            <StackPanel>
-                                <GroupBox Header="Umbenennungsregeln">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Column="0" Content="Namensformat Jahr:"/>
-                                            <ComboBox x:Name="cbx_jahr" Grid.Column="1" SelectedValuePath="Content">
-                                            <ComboBoxItem IsSelected="True">2000</ComboBoxItem>
-                                            <ComboBoxItem>2001</ComboBoxItem>
-                                        </ComboBox>
-                                        <Label Grid.Column="2" Content="Monat:"/>
-                                        <ComboBox x:Name="cbx_monat" Grid.Column="3" >
-                                            <ComboBoxItem IsSelected="True">06</ComboBoxItem>
-                                            <ComboBoxItem>05</ComboBoxItem>
-                                        </ComboBox>
-                                        <StackPanel Grid.Column="4" Margin="5,0,0,0">
-                                            <RadioButton GroupName="IDE" Content="Old Filename" IsChecked="True"/>
-                                            <RadioButton GroupName="IDE" Content="Zähler"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </GroupBox>
-                                <Button x:Name="btn_manfilerename" Style="{StaticResource InformButton}" Content="Vorschau neuer Namen" Click="ManFileRename_Click"/>
-                            </StackPanel>
-                        </Expander>
-                        <StackPanel Orientation="Horizontal">
-                            <Button x:Name="read_workdir" Style="{StaticResource InformButton}" Content="Arbeitsordner neu einlesen" Click="read_workdir_Click"/>
-                            <Button x:Name="FileRename" Style="{StaticResource InformButton}" Content="Umbenennen" Click="FileRename_Click"/>
-                            <Button x:Name="ui_btn_movetoarchiv" Style="{StaticResource InformButton}" Content="Dateien im Archiv ablegen" Click="ui_btn_movetoarchiv_Click"/>
-                            <Button x:Name="ui_btn_iptcwrite" IsEnabled="False" Style="{StaticResource InformButton}" Content="IPTC schreiben" Click="ui_btn_iptcwrite_Click"/>
-                            <CheckBox x:Name="ui_chk_showall" VerticalContentAlignment="Center" Margin="5,0,0,0" Checked="ui_chk_showall_Checked" Unchecked="ui_chk_showall_Unchecked">Alle Infos anzeigen</CheckBox>
-                        </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label x:Name="label3" Width="250" Content="Verzeichnis mit Bildern aus der Kamera:" Foreground="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" FontWeight="Bold" Padding="5"/>
+                        <TextBox x:Name="ui_txt_workdir" Width="500" Text="unbekannt" FontSize="16" FontWeight="Bold" />
+                        <Button x:Name="ui_btn_workdir" Content="..." Width="30" Click="ui_btn_workdir_Click"/>
+                        <Button x:Name="ui_btn_openworkdir" Width="30" Click="ui_btn_openworkdir_Click">
+                            <Image Height="20" Source="img\explorer24.png"/>
+                        </Button>
                     </StackPanel>
-                    <DataGrid x:Name="ui_data_allfiles" ItemsSource="{Binding}" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" LoadingRow="DataGrid_LoadingRow" Background="{x:Null}" FontWeight="Bold" FontSize="14">
-                        <!--<DataGrid.RowStyle>
+                </Grid>
+                <Expander Header="Manuelle Umbenennung" BorderThickness="1,1,1,5" Background="#FF5192BA" BorderBrush="#FF061168" >
+                    <StackPanel>
+                        <GroupBox Header="Umbenennungsregeln">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0" Content="Namensformat Jahr:"/>
+                                <ComboBox x:Name="cbx_jahr" Grid.Column="1" SelectedValuePath="Content">
+                                    <ComboBoxItem IsSelected="True">2000</ComboBoxItem>
+                                    <ComboBoxItem>2001</ComboBoxItem>
+                                </ComboBox>
+                                <Label Grid.Column="2" Content="Monat:"/>
+                                <ComboBox x:Name="cbx_monat" Grid.Column="3" SelectedValuePath="Content">
+                                    <ComboBoxItem IsSelected="True">06</ComboBoxItem>
+                                    <ComboBoxItem>05</ComboBoxItem>
+                                </ComboBox>
+                                <StackPanel Grid.Column="4" Margin="5,0,0,0">
+                                    <RadioButton GroupName="IDE" Content="Old Filename" IsChecked="True"/>
+                                    <RadioButton GroupName="IDE" Content="Zähler"/>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                        <Button x:Name="btn_manfilerename" Style="{StaticResource InformButton}" Content="Vorschau neuer Namen" Click="ManFileRename_Click"/>
+                    </StackPanel>
+                </Expander>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="read_workdir" Style="{StaticResource InformButton}" Content="Arbeitsordner neu einlesen" Click="read_workdir_Click"/>
+                    <Button x:Name="FileRename" Style="{StaticResource InformButton}" Content="Umbenennen" Click="FileRename_Click"/>
+                    <Button x:Name="ui_btn_movetoarchiv" Style="{StaticResource InformButton}" Content="Dateien im Archiv ablegen" Click="ui_btn_movetoarchiv_Click"/>
+                    <Button x:Name="ui_btn_iptcwrite" IsEnabled="False" Style="{StaticResource InformButton}" Content="IPTC schreiben" Click="ui_btn_iptcwrite_Click"/>
+                    <CheckBox x:Name="ui_chk_showall" VerticalContentAlignment="Center" Margin="5,0,0,0" Checked="ui_chk_showall_Checked" Unchecked="ui_chk_showall_Unchecked">Alle Infos anzeigen</CheckBox>
+                </StackPanel>
+            </StackPanel>
+            <DataGrid x:Name="ui_data_allfiles" ItemsSource="{Binding}" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" LoadingRow="DataGrid_LoadingRow" Background="{x:Null}" FontWeight="Bold" FontSize="14">
+                <!--<DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         -->
-                        <!--<Setter Property="Background" Value="LightBlue" />-->
-                        <!--
+                <!--<Setter Property="Background" Value="LightBlue" />-->
+                <!--
                         <Setter Property="Background" Value="{Binding Converter={StaticResource HighlightConverter}}" />
                     </Style>
                 </DataGrid.RowStyle>-->
-                    </DataGrid>
-                    <!--<DataGrid ItemsSource="{Binding}" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" Background="{x:Null}"/>-->
-                </DockPanel>
-            </DockPanel>
-        <!--</TabItem>
+            </DataGrid>
+            <!--<DataGrid ItemsSource="{Binding}" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" Background="{x:Null}"/>-->
+        </DockPanel>
+    </DockPanel>
+    <!--</TabItem>
         <TabItem Header="Helper">
 
         </TabItem>

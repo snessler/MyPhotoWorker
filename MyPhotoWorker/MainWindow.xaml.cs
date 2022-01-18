@@ -307,7 +307,7 @@ namespace MyPhotoWorker
         {
             foreach (MediaFile mf in AllFiles)
             {
-                mf.FileNameNew = cbx_jahr.SelectedValue.ToString();
+                mf.FileNameNew = cbx_jahr.SelectedValue.ToString() + "-" + cbx_monat.SelectedValue.ToString() + "-";
             }
         }
     }
