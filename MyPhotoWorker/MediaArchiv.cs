@@ -64,7 +64,7 @@ namespace MyPhotoWorker
             int number;
             foreach (MediaFile mf in AllFiles)
             {
-                if (mf.FileName.Length < 14) continue;
+                if (mf.FileName.Length < 10) continue;
                 y = mf.FileName.Substring(0, 4);
                 try
                 {
@@ -90,6 +90,7 @@ namespace MyPhotoWorker
         }
         private void MoveFromWorkToArchiv(string year, string month, string fullfilename)
         {
+            Console.WriteLine("Move File: " + fullfilename);
             string dir = Path + year + @"\";
             if (!System.IO.Directory.Exists(dir)) System.IO.Directory.CreateDirectory(dir);
             dir += month + @"\";

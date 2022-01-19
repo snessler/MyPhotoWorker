@@ -86,6 +86,11 @@ namespace MyPhotoWorker
             MemoryStream data = new MemoryStream(File.ReadAllBytes(FullFileName));
             BitmapSource img = BitmapFrame.Create(data);
             BitmapMetadata meta = (BitmapMetadata)img.Metadata;
+            if (meta.DateTaken == null)
+            {
+                SetFileChangeDate();
+                return;
+            }
             try
             {
                 //if (CamSName == "") CamSName = meta.CameraModel;
