@@ -21,6 +21,7 @@ namespace MyPhotoWorker
         private string _FileExtension = "";
         private string _FileNameNew = "_";
         private string _IptcKeys = "_";
+        private bool _IsSetOldName = false;
         private string _MediaDate = "";
         private string _MediaDateType = ""; // E...Exif T...Tool F...File
         private string _FileNo = "";
@@ -38,6 +39,7 @@ namespace MyPhotoWorker
         public string FileExtension { get { return _FileExtension; } set { _FileExtension = value; } }
         public string FileNameNew { get { return _FileNameNew; } set { _FileNameNew = value; Changed(); } }
         public string IptcKeys { get { return _IptcKeys; } set { _IptcKeys = value; } }
+        public bool IsSetOldName { get { return _IsSetOldName; } set { _IsSetOldName = value; BuildNewName(); } }
         public string MediaDate { get { return _MediaDate; } set { _MediaDate = value; BuildNewName(); } }
         public string MediaDateType { get { return _MediaDateType; } set { _MediaDateType = value; } }
         public string FileNo { get { return _FileNo; } set { _FileNo = value; BuildNewName(); } }
@@ -47,9 +49,10 @@ namespace MyPhotoWorker
         public string FullFileName { get { return _FullFileName; } set { _FullFileName = value; } }
         public string Info { get { return _Info; } set { _Info = value; BuildNewName(); } }
 
-        public MediaFile(int iid, string ifilename, Cameras cams)
+        public MediaFile(int iid, string ifilename, Cameras cams, bool oldname)
         {
             Id = iid;
+            IsSetOldName = oldname;
             FullFileName = ifilename;
             FileName = ifilename.Substring(ifilename.LastIndexOf('\\')+1);
             FileName = FileName.Split('.')[0];
@@ -232,6 +235,7 @@ namespace MyPhotoWorker
             if (CamSName == "" && CamName!="") FileNameNew += "_" + CamName;
             else FileNameNew += CamSName;
             if (Info != "") FileNameNew += "_" + Info;
+            if (IsSetOldName) FileNameNew += "_" + FileName;
             FileNameNew += "."+FileExtension;
         }
         private void Changed([CallerMemberName]string propertyName = null)

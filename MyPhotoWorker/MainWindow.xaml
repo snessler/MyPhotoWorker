@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyPhotoWorker"
         mc:Ignorable="d"
-        Title="MyPhotoWorker x.x" WindowState="Maximized" MinHeight="540" MinWidth="850">
+        Title="MyPhotoWorker x.x" WindowState="Maximized" MinHeight="540" MinWidth="950" d:DesignWidth="950">
     <Window.Background>
         <ImageBrush ImageSource="img/background.jpg"/>
     </Window.Background>
@@ -144,7 +144,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label x:Name="label3" Width="250" Content="Verzeichnis mit Bildern aus der Kamera:" Foreground="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" FontWeight="Bold" Padding="5"/>
+                        <Label x:Name="label3" Content="Arbeitsordner (Kamerabilder):" Foreground="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" FontWeight="Bold" Padding="5"/>
                         <TextBox x:Name="ui_txt_workdir" Width="500" Text="unbekannt" FontSize="16" FontWeight="Bold" />
                         <Button x:Name="ui_btn_workdir" Content="..." Width="30" Click="ui_btn_workdir_Click"/>
                         <Button x:Name="ui_btn_openworkdir" Width="30" Click="ui_btn_openworkdir_Click">
@@ -162,25 +162,32 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Column="0" Content="Namensformat Jahr:"/>
-                                <ComboBox x:Name="cbx_jahr" Grid.Column="1" SelectedValuePath="Content">
-                                    <ComboBoxItem IsSelected="True">2000</ComboBoxItem>
-                                    <ComboBoxItem>2001</ComboBoxItem>
-                                </ComboBox>
+                                <ComboBox x:Name="cbx_jahr" Grid.Column="1" VerticalAlignment="Center"/>
                                 <Label Grid.Column="2" Content="Monat:"/>
-                                <ComboBox x:Name="cbx_monat" Grid.Column="3" SelectedValuePath="Content">
-                                    <ComboBoxItem IsSelected="True">06</ComboBoxItem>
-                                    <ComboBoxItem>05</ComboBoxItem>
-                                </ComboBox>
-                                <StackPanel Grid.Column="4" Margin="5,0,0,0">
-                                    <RadioButton GroupName="IDE" Content="Old Filename" IsChecked="True"/>
-                                    <RadioButton GroupName="IDE" Content="Zähler"/>
-                                </StackPanel>
+                                <ComboBox x:Name="cbx_monat" Grid.Column="3" VerticalAlignment="Center" />
+                                <Label Grid.Column="4" Content="Tag:"/>
+                                <ComboBox x:Name="cbx_tag" Grid.Column="5" VerticalAlignment="Center" />
+                                <Label Grid.Column="6" Content="Stunde:"/>
+                                <ComboBox x:Name="cbx_stunde" Grid.Column="7" VerticalAlignment="Center" />
+                                <Label Grid.Column="8" Content="Minute:"/>
+                                <ComboBox x:Name="cbx_minute" Grid.Column="9" VerticalAlignment="Center" />
+                                <CheckBox x:Name="ckb_zaehler" Grid.Column="10" Margin="5,0,0,0" VerticalAlignment="Center">Zähler</CheckBox>
+                                <CheckBox x:Name="ckb_oldname" Grid.Column="11" Margin="5,0,0,0" VerticalAlignment="Center" IsChecked="True" >Alter Name</CheckBox>
+                                <CheckBox x:Name="ckb_revno" Grid.Column="12" Margin="5,0,0,0" VerticalAlignment="Center" >Absteigender Zähler</CheckBox>
                             </Grid>
                         </GroupBox>
                         <Button x:Name="btn_manfilerename" Style="{StaticResource InformButton}" Content="Vorschau neuer Namen" Click="ManFileRename_Click"/>
@@ -192,6 +199,7 @@
                     <Button x:Name="ui_btn_movetoarchiv" Style="{StaticResource InformButton}" Content="Dateien im Archiv ablegen" Click="ui_btn_movetoarchiv_Click"/>
                     <Button x:Name="ui_btn_iptcwrite" IsEnabled="False" Style="{StaticResource InformButton}" Content="IPTC schreiben" Click="ui_btn_iptcwrite_Click"/>
                     <CheckBox x:Name="ui_chk_showall" VerticalContentAlignment="Center" Margin="5,0,0,0" Checked="ui_chk_showall_Checked" Unchecked="ui_chk_showall_Unchecked">Alle Infos anzeigen</CheckBox>
+                    <CheckBox x:Name="ui_chk_oldname" VerticalContentAlignment="Center" Margin="5,0,0,0">Alte Namen anhängen</CheckBox>
                 </StackPanel>
             </StackPanel>
             <DataGrid x:Name="ui_data_allfiles" ItemsSource="{Binding}" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" LoadingRow="DataGrid_LoadingRow" Background="{x:Null}" FontWeight="Bold" FontSize="14">

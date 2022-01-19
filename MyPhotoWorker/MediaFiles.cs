@@ -32,7 +32,7 @@ namespace MyPhotoWorker
             return this.ElementAt(iid-1);
         }
 
-        public void ReadWorkDir(string iWorkdir, Cameras cams)
+        public void ReadWorkDir(string iWorkdir, Cameras cams, bool oldname)
         {
             if (!Directory.Exists(iWorkdir)) return; 
             List<string> filesAll = new List<string>();
@@ -70,7 +70,7 @@ namespace MyPhotoWorker
                 wp.Dispatcher.Invoke(EmptyDelegate, System.Windows.Threading.DispatcherPriority.Background);
                 //wp.pbar.Dispatcher.Invoke(EmptyDelegate, System.Windows.Threading.DispatcherPriority.Background);
                 ((MainWindow)System.Windows.Application.Current.MainWindow).ui_taskitem.ProgressValue = counter / max;
-                this.Add(new MediaFile(counter, f, cams));
+                this.Add(new MediaFile(counter, f, cams, oldname));
             }
             ((MainWindow)System.Windows.Application.Current.MainWindow).ui_taskitem.ProgressValue = 0;
             //Doppelte Dateinamen mit Nummern versehen
@@ -117,7 +117,7 @@ namespace MyPhotoWorker
         {
             string ret = i.ToString();
             if (ret.Length == 1) ret = "0" + ret;
-            Console.WriteLine(i+" neu "+ret);
+            //Console.WriteLine(i+" neu "+ret);
             return ret;
         }
         public void ReadWorkDir_old(string iWorkdir, Cameras cams)
@@ -158,7 +158,7 @@ namespace MyPhotoWorker
                     foreach (string f in files)
                     {
                         counter++;
-                        this.Add(new MediaFile(counter, f, cams));
+                        this.Add(new MediaFile(counter, f, cams, false));
                     }
                 }
                 catch (Exception e)

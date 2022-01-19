@@ -35,6 +35,7 @@ namespace MyPhotoWorker
         MediaFiles AllFiles = new MediaFiles();
         // löschen ! List<string> AddInfoList = new List<string> { "beruf" };
         String Version = "MyPhotoWorker " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+       
 
         //public Cameras AllCameras { get { return _AllCameras; } set { _AllCameras = value; } }
 
@@ -58,6 +59,7 @@ namespace MyPhotoWorker
                 this.Background = new ImageBrush(new BitmapImage(new Uri(App.AppExePath + "background.jpg", UriKind.Absolute)));
             }
             this.DataContext = AllFiles;
+            FillUiData();
             //ui_taskitem.ProgressValue = counter;
         }
         private void SetWindowTitle()
@@ -70,6 +72,38 @@ namespace MyPhotoWorker
             {
                 this.Title = Version + "  -  ARCHIV: unbekannt";
             }
+        }
+        
+        private void FillUiData()
+        {
+            //Jahre
+            int year = DateTime.Now.Year;
+            do
+            {
+                cbx_jahr.Items.Add(year.ToString());
+                year--;
+            } while (year>1979);
+            cbx_jahr.SelectedItem = DateTime.Now.Year.ToString();
+            //Monate
+            string[] month = new string[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
+            foreach (string s in month) cbx_monat.Items.Add(s);
+            cbx_monat.SelectedItem = "06";
+            //Tag
+            string[] day = new string[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
+            foreach (string s in day) cbx_tag.Items.Add(s);
+            cbx_tag.SelectedItem = "15";
+            //Stunde
+            string[] hour = new string[] { "  ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+            foreach (string s in hour) cbx_stunde.Items.Add(s);
+            cbx_stunde.SelectedItem = "  ";
+            //Minute
+            string[] minute = new string[] { "  ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09" };
+            foreach (string s in minute) cbx_minute.Items.Add(s);
+            for (int i = 10; i < 60; i++)
+            {
+                cbx_minute.Items.Add(i.ToString());
+            }
+            cbx_minute.SelectedItem = "  ";
         }
 
         private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -122,7 +156,7 @@ namespace MyPhotoWorker
                 MessageBox.Show("Workdir not exist");
                 return;
             }
-            AllFiles.ReadWorkDir(path, AllCameras);
+            AllFiles.ReadWorkDir(path, AllCameras, (bool)ui_chk_oldname.IsChecked);
             //MessageBox.Show("Dateien verarbeitet!");
         }
         private void FileRename_Click(object sender, RoutedEventArgs e)
@@ -305,9 +339,25 @@ namespace MyPhotoWorker
         }
         private void ManFileRename()
         {
+            //Namensteile festlegen
+            string pre = cbx_jahr.SelectedItem + "-" + cbx_monat.SelectedItem;
+            string no = "";
+            string post = "";
+            int i = 0;
+            if (cbx_tag.SelectedValue.ToString() != "  ") pre += "-" + cbx_tag.SelectedItem;
+            if (cbx_stunde.SelectedValue.ToString() != "  ") {
+                pre += "_" + cbx_stunde.SelectedItem;
+                if (cbx_minute.SelectedValue.ToString() != "  ") pre += "-" + cbx_minute.SelectedItem;
+                //pre += "-test";
+            }
+            if ((bool)ckb_revno.IsChecked) i = AllFiles.Count+1;
             foreach (MediaFile mf in AllFiles)
             {
-                mf.FileNameNew = cbx_jahr.SelectedValue.ToString() + "-" + cbx_monat.SelectedValue.ToString() + "-";
+                if ((bool)ckb_revno.IsChecked) i--;
+                else i++;
+                if ((bool)ckb_zaehler.IsChecked) no = "_" + AllFiles.SerienNumberZero(i);
+                if ((bool)ckb_oldname.IsChecked) post = "_" + mf.FileName;
+                mf.FileNameNew = pre + no + post + "." + mf.FileExtension;
             }
         }
     }
