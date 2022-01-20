@@ -111,13 +111,13 @@
         <TabItem Header="Von Kameras">-->
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Help">
+            <!--<MenuItem Header="_Help">
                 <MenuItem Header="_Ansicht" >
                     <RadioButton IsChecked="True">Klein</RadioButton>
                     <RadioButton>Groß</RadioButton>
                 </MenuItem>
                 <MenuItem Header="_Info" />
-            </MenuItem>
+            </MenuItem>-->
             <MenuItem Header="_Archiv">
                 <MenuItem Header="Archivverzeichnis auswählen" Click="MenuItem_Click_1" />
                 <MenuItem Header="Archivverzeichnis öffnen" Click="MenuItem_Click_2" />
