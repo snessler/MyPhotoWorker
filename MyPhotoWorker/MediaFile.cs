@@ -78,6 +78,7 @@ namespace MyPhotoWorker
                 {
                     ret = metadata.Keywords.Aggregate((old, val) => old + "*" + val); 
                 }
+            stream.Close();
             return ret;
         }
         private void SetExifMetaData(Cameras cams)

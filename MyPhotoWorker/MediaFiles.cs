@@ -34,13 +34,14 @@ namespace MyPhotoWorker
 
         public void ReadWorkDir(string iWorkdir, Cameras cams, bool oldname)
         {
+            DirectoryInfo _dir;
             if (!Directory.Exists(iWorkdir)) return; 
             List<string> filesAll = new List<string>();
             this.Clear();
             counter = 0;
             try
             { 
-                DirectoryInfo _dir = new DirectoryInfo(iWorkdir);
+                _dir = new DirectoryInfo(iWorkdir);
                 string ext = "";
                 //Jede Datei im ausgewählten Verzeichnis
                 foreach (FileInfo cf in _dir.GetFiles())
@@ -50,11 +51,13 @@ namespace MyPhotoWorker
                     {
                         filesAll.Add(cf.FullName);
                     }
+                    
                 }
+                _dir.Refresh();
             }
             catch
             {
-                ;
+                _dir = null;
             }
             //System.Windows.MessageBox.Show(filesAll.Count.ToString() + " Mediadateien gefunden! Bitte etwas Geduld nach dem Klick auf OK!");
             //((MainWindow)System.Windows.Application.Current.MainWindow).ui_taskitem.ProgressValue = 0.1;
